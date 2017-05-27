@@ -1,0 +1,18 @@
+int minSubArrayLen(int s, vector<int>& nums)
+    {
+        int sum = 0, minRange = INT_MAX;
+        int n = nums.size(), start = 0;
+        
+        for(int end = 0; end < n;)
+        {
+            while(end < n && sum < s)
+            sum = sum + nums[end++];
+
+            while(sum >= s)
+            {
+                minRange = min(minRange, end - start);
+                sum = sum - nums[start++];
+            }
+        }
+        return (minRange == INT_MAX)? 0 : minRange;
+    }
